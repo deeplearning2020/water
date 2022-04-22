@@ -13,7 +13,7 @@ from datasets.hyperspectral_datasets import thesis_dataset
 from datasets.watershed_datasets import watershed_augment_dataset
 from watershed_labels import get_watershed_labels
 from utils import AverageMeter, hash_param, EarlyStopping
-from evaluate import evaluate_model_watershed, mean_average_precision
+from metrics import evaluate_model_watershed, mean_average_precision
 
 
 
