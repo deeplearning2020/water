@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from modules.models import models
+from models import transformer_net
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, Subset
 from datasets.hyperspectral_datasets import thesis_dataset
 from datasets.watershed_datasets import watershed_augment_dataset
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     param['number_features'] = base_dataset.number_features
     param['number_labels'] = base_dataset.number_labels
 
-    model = models(**param).to(param['device'])
+    model = transformer_net(**param).to(param['device'])
 
     optimizer = optim.SGD(model.parameters(), lr=0.001, weight_decay=1e-6)
     scheduler = optim.lr_scheduler.CyclicLR(optimizer, base_lr=0.001, max_lr=0.1, step_size_up=50)

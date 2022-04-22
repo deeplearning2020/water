@@ -435,7 +435,7 @@ class ConViT(nn.Module):
         return out
 
 
-class modelA(nn.Module):
+class transformer_net(nn.Module):
     def __init__(self, **param):
         super().__init__()
         self.number_features = param['number_features']
