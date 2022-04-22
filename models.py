@@ -583,7 +583,8 @@ class transformer_net(nn.Module):
 
         self.bn4 = nn.BatchNorm1d(32*sz*sz)
         self.fc = nn.Linear(32*sz*sz, self.embed_dim)
-
+        self.transformer = ConvTransformerBLock(self.embed_dim)
+    
     def forward_rep(self, x):
         out = F.dropout(F.relu(self.graph1(self.conv1(self.bn1(x)))),p=0.3)
         out = F.relu(self.graph2(self.conv2(self.bn2(out))))
@@ -591,6 +592,7 @@ class transformer_net(nn.Module):
         #out = F.relu(self.cord1(out))
         out = torch.reshape(out, (len(out), -1))
         out = self.fc(self.bn4(out))
+        out = self.transformer(out)
         return out
 
     def forward(self, x):
