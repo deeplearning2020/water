@@ -592,8 +592,9 @@ class transformer_net(nn.Module):
         #out = torch.reshape(out, -1)
 
         #out = F.relu(self.cord1(out))
-        out = torch.reshape(out, (len(out), -1))
+        out = torch.reshape(out, (len(out)))
         out = self.transformer(out)
+        out = torch.reshape(out, (len(out), -1))
         out = self.fc(self.bn4(out))
         return out
 
