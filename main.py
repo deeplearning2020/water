@@ -97,7 +97,7 @@ if __name__ == "__main__":
     param['train_size'] = args.train_size
     param['patch_size'] = args.patch_size
 
-    base_dataset = Hyperspectral_Dataset(**param)
+    base_dataset = thesis_dataset(**param)
     watershed_dataset = watershed_augment_dataset(base_dataset, **param)
 
     param['number_features'] = base_dataset.number_features
