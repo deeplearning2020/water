@@ -101,7 +101,7 @@ class SelfAttentionConv(nn.Module):
 # Conv Transforme Block
 
 class ConvTransformerBLock(nn.Module):
-    def __init__(self, k, headers, kernel_size = 5, mask_next = True, mask_diag = False, dropout_proba = 0.2):
+    def __init__(self, k, headers = 8, kernel_size = 5, mask_next = True, mask_diag = False, dropout_proba = 0.2):
         super().__init__()
         
         # Self attention
