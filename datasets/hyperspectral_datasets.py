@@ -140,7 +140,7 @@ def get_indianpines_data(root="./data", download=True):
 
 
 def get_paviaU_data(root="./data", download=True):
-"
+
     data_url = "http://www.ehu.eus/ccwintco/uploads/e/ee/PaviaU.mat"
     gt_url = "http://www.ehu.eus/ccwintco/uploads/5/50/PaviaU_gt.mat"
 
