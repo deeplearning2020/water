@@ -13,6 +13,8 @@ BatchNorm2d = nn.BatchNorm2d
 BatchNorm1d = nn.BatchNorm1d
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 class h_sigmoid(nn.Module):
     def __init__(self, inplace=True):
         super(h_sigmoid, self).__init__()
@@ -221,29 +223,13 @@ class MultiHeadAttention(nn.Module):
         self.linear = nn.Linear(d_model, d_model)
 
     def split_heads(self, x):
-        '''Split the last dimension into (num_heads, depth).
-        Transpose the result such that the shape is (batch_size, num_heads, seq_len, depth)
-        '''
+
         N, L, D = x.shape
         x = x.view(N, L, self.num_heads, -1)
         return x.permute(0, 2, 1, 3)
 
     def scaled_dot_product_attention(self, q, k, v, mask):
-        '''
-        Attention(Q,K,V) = softmax(QK/sqrt(d)) * V
-        The mask is multiplied with -1e9 (close to negative infinity). 
-        This is done because the mask is summed with the scaled 
-        matrix multiplication of Q and K and is applied immediately before a softmax. 
-        The goal is to zero out these cells, and large negative inputs to softmax are near zero in the output.        
-        Args:
-          q: query shape (N,num_heads,Lq,depth)
-          k: key shape (N,num_heads,Lk,depth)
-          v: value shape (N,num_heads,Lv,depth)
-          mask: mask shape (N,num_heads,Lq,Lk)
-        Returns:
-          out: sized [N,M,Lq,depth]
-          attention_weights: sized [N,M,Lq,Lk]
-        '''
+
         N, M, Lq, D = q.shape
         q = q.reshape(N*M, -1, D)
         k = q.reshape(N*M, -1, D)

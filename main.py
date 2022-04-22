@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-import models
+from models import models
 from torch.utils.data import Dataset, DataLoader, SubsetRandomSampler, Subset
 from datasets.hyperspectral_datasets import thesis_dataset
 from datasets.watershed_datasets import watershed_augment_dataset
