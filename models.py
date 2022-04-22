@@ -589,6 +589,7 @@ class transformer_net(nn.Module):
         out = F.dropout(F.relu(self.graph1(self.conv1(self.bn1(x)))),p=0.3)
         out = F.relu(self.graph2(self.conv2(self.bn2(out))))
         out = F.relu(self.conv3(self.bn3(out)))
+        out = torch.reshape(out, -1))
         out = self.transformer(out)
         #out = F.relu(self.cord1(out))
         out = torch.reshape(out, (len(out), -1))
